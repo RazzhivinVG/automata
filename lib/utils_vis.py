@@ -31,8 +31,11 @@ def to_alpha(x):
     return np.clip(x[..., :1], 0, 0.9999)
 
 def to_rgb(x):
-    grayscale = np.clip(x[..., :1], 0, 0.9999)  # Извлечение первого канала (grayscale)
-    return np.repeat(grayscale, 3, axis=-1)  # Дублирование канала для создания RGB изображения
+    rgb, a = x[..., 1:4], to_alpha(x)
+    return np.clip(a + rgb, 0, 0.9999)
+
+def to_grayscale(x):
+    return np.dot(x[..., 1:4], [0.2989, 0.5870, 0.1140])
 
 def get_living_mask(x):
     return nn.MaxPool2d(3, stride=1, padding=1)(x[:, 3:4, :, :])>0.1
