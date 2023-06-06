@@ -31,6 +31,7 @@ class displayer:
                     size = self.pix_size
                 s = pygame.Surface((size,size))
                 c = (_map[i,j]*256).astype(int)[:3]
+                print(c)
                 s.fill(c)
                 self.screen.blit(s, (x-int(size/2), y-int(size/2)))
         pygame.display.update()

@@ -30,8 +30,6 @@ output = model(torch.from_numpy(_map.reshape([1,_map_shape[0],_map_shape[1],CHAN
 
 disp = displayer(_map_shape, pix_size)
 
-
-
 isMouseDown = False
 running = True
 while running:
