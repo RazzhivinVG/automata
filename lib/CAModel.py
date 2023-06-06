@@ -67,9 +67,6 @@ class CAModel(nn.Module):
 
     def forward(self, x, steps=1, fire_rate=None, angle=0.0):
 
-        hidden_layers = []
-
         for step in range(steps):
             x = self.update(x, fire_rate, angle)
-            hidden_layers.append(x.clone())  # Сохранение значения скрытого слоя
         return x, hidden_layers
