@@ -35,7 +35,7 @@ def to_rgb(x):
     return np.clip(a + rgb, 0, 0.9999)
 
 def to_grayscale(x):
-    return np.dot(x[..., 1:4], [0.2989, 0.5870, 0.1140])
+    return np.dot(x[..., :3], [0.2989, 0.5870, 0.1140])
 
 def get_living_mask(x):
     return nn.MaxPool2d(3, stride=1, padding=1)(x[:, 3:4, :, :])>0.1
