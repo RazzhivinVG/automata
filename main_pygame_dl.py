@@ -30,6 +30,8 @@ output = model(torch.from_numpy(_map.reshape([1,_map_shape[0],_map_shape[1],CHAN
 
 disp = displayer(_map_shape, pix_size)
 
+
+
 isMouseDown = False
 running = True
 while running:
@@ -56,5 +58,10 @@ while running:
 
     output = model(output, 1)
 
-    _map = to_rgb(output.detach().numpy()[0])
+    def gray_out(x):
+        channel = x[..., 0:1]  # беру первый канал
+        grayscale = np.repeat(channel, 3, axis=-1)  # копирую значения в остальные каналы
+        return grayscale
+
+    _map = gray_out(output.detach().numpy()[0])
     disp.update(_map)
