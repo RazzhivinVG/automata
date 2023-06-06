@@ -69,4 +69,4 @@ class CAModel(nn.Module):
 
         for step in range(steps):
             x = self.update(x, fire_rate, angle)
-        return x, hidden_layers
+        return x
